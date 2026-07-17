@@ -1,0 +1,23 @@
+{
+ "actions": [],
+ "allow_guest": 0,
+ "creation": "2026-07-15 00:00:00",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2026-07-15 00:00:00",
+ "modified_by": "Administrator",
+ "module": "AFPPF Project Management",
+ "name": "loan_analytics_dashb",
+ "owner": "Administrator",
+ "page_name": "loan_analytics_dashb",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ],
+ "script": "loan_analytics_dashb.js",
+ "style": "loan_analytics_dashb.css",
+ "standard": "Yes",
+ "title": "Loan Analytics Dashboard"
+}
