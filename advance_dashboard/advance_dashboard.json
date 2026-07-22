@@ -1,0 +1,23 @@
+{
+ "actions": [],
+ "allow_guest": 0,
+ "creation": "2026-07-15 00:00:00",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2026-07-15 00:00:00",
+ "modified_by": "Administrator",
+ "module": "AFPPF Project Management",
+ "name": "advance_dashboard",
+ "owner": "Administrator",
+ "page_name": "advance_dashboard",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ],
+ "script": "advance_dashboard.js",
+ "style": "advance_dashboard.css",
+ "standard": "Yes",
+ "title": "Advance Dashboard"
+}
