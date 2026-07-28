@@ -1,0 +1,549 @@
+<div class="ug-root" dir="rtl">
+
+    <header class="ug-hero">
+        <div class="ug-hero-text">
+            <span class="ug-hero-kicker">نظام إدارة المشاريع — AFPPF</span>
+            <h1>دليل المستخدم</h1>
+            <p>مرجع عملي يشرح دورة حياة المشروع في النظام، من الفكرة حتى الإغلاق، مع خطوات تنفيذ كل عملية والمستندات المرتبطة بها.</p>
+        </div>
+        <div class="ug-hero-tools">
+            <div class="ug-hero-search">
+                <input type="search" id="ug-search" placeholder="ابحث في الدليل… (مثال: ميزانية، مستخلص، مؤشر)" autocomplete="off">
+                <span class="ug-search-icon">🔍</span>
+            </div>
+            <div class="ug-search-status" id="ug-search-status"></div>
+            <button type="button" class="ug-print-btn" id="ug-print">🖨️ طباعة الدليل</button>
+        </div>
+    </header>
+
+    <div class="ug-layout">
+
+        <nav class="ug-toc" id="ug-toc" aria-label="فهرس الدليل">
+            <h2>المحتويات</h2>
+            <ul id="ug-toc-list"></ul>
+        </nav>
+
+        <main class="ug-content" id="ug-content">
+
+            <!-- ============ مقدمة ============ -->
+            <section class="ug-section" id="ug-intro" data-title="مقدمة">
+                <h2><span class="ug-sec-num">1</span> مقدمة</h2>
+                <p class="ug-lead">
+                    هذا النظام مبني على منصة <strong>Frappe / ERPNext</strong> ويغطي إدارة المشاريع التنموية
+                    عبر أربع مراحل متتابعة: <strong>التصميم</strong> ثم <strong>التخطيط</strong> ثم
+                    <strong>التنفيذ</strong> ثم <strong>الإغلاق</strong>. لكل مرحلة مجموعة مستندات خاصة بها،
+                    وكلها ترتبط في النهاية بمستند <em>المشروع</em> الواحد.
+                </p>
+                <div class="ug-callout ug-callout-info">
+                    <strong>كيف تقرأ هذا الدليل؟</strong>
+                    استعمل الفهرس على اليمين للتنقل، أو اكتب في مربع البحث بالأعلى لعرض الأقسام
+                    التي تحتوي على الكلمة فقط. كل مستند مذكور هنا يمكن الوصول إليه مباشرة من
+                    مساحة عمل <em>Project Managment</em> في القائمة الجانبية.
+                </div>
+            </section>
+
+            <!-- ============ واجهة الموظف ============ -->
+            <section class="ug-section" id="ug-employee" data-title="واجهة الموظف">
+                <h2><span class="ug-sec-num"></span> واجهة الموظف</h2>
+                <p>مساحة عمل تجمع كل ما يحتاجه الموظف في مكان واحد. تصل إليها من القائمة
+                   الجانبية باسم <strong>واجهة الموظف</strong>، وتنقسم إلى ست بطاقات:</p>
+
+                <figure class="ug-shot">
+                    <div class="ug-shot-frame">
+                        <img src="/assets/afppf_project_management/images/user_guide/01-employee-workspace.png"
+                             alt="مساحة عمل واجهة الموظف">
+                        <span class="ug-ring" style="--x:79;--y:85;--w:12.4;--h:3.6"></span>
+                        <span class="ug-pin" style="--x:79;--y:85">1</span>
+                        <span class="ug-ring" style="--x:49.3;--y:25.3;--w:4.5;--h:3.4"></span>
+                        <span class="ug-pin" style="--x:49.3;--y:25.3">2</span>
+                    </div>
+                    <figcaption>واجهة الموظف كما تظهر بعد تسجيل الدخول</figcaption>
+                </figure>
+
+                <ol class="ug-steps">
+                    <li data-pin="1">من القائمة الجانبية اضغط <strong>واجهة الموظف</strong>.</li>
+                    <li data-pin="2">تحت بطاقة <strong>التكاليف والاذونات</strong> اضغط <strong>إذن</strong> لفتح شاشة الأذونات.</li>
+                </ol>
+
+                <table class="ug-table">
+                    <thead><tr><th style="width:26%">البطاقة</th><th>ما تحتويه</th></tr></thead>
+                    <tbody>
+                        <tr><td>الموارد البشرية</td><td>بيانات <em>الموظف</em>، و<em>طلب إجازة</em>.</td></tr>
+                        <tr><td>التكاليف والاذونات</td><td><em>إذن</em> — أذونات الدخول المتأخر والخروج.</td></tr>
+                        <tr><td>سلفة</td><td><em>طلب سلفة</em>.</td></tr>
+                        <tr><td>الحضور</td><td><em>بصمة الموظف</em>، <em>طلب حضور</em>، و<em>الحضور</em>.</td></tr>
+                        <tr><td>المخازن</td><td><em>طلب مواد</em> و<em>طلب خدمة</em>.</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ============ طلب إذن ============ -->
+            <section class="ug-section" id="ug-permit" data-title="طلب إذن">
+                <h2><span class="ug-sec-num"></span> طلب إذن</h2>
+                <p>الإذن هو تصريح بالدخول المتأخر أو الخروج أثناء الدوام. بعد فتح شاشة
+                   <strong>إذن</strong> اضغط <strong>+ إضافة</strong> لتظهر لك هذه الشاشة:</p>
+
+                <figure class="ug-shot">
+                    <div class="ug-shot-frame">
+                        <img src="/assets/afppf_project_management/images/user_guide/02-permit-new.png"
+                             alt="نموذج إذن جديد فارغ">
+                        <span class="ug-ring" style="--x:50.5;--y:15.5;--w:39.5;--h:6.2"></span>
+                        <span class="ug-pin" style="--x:50.5;--y:15.5">1</span>
+                        <span class="ug-ring" style="--x:9.5;--y:15.5;--w:39.5;--h:6.2"></span>
+                        <span class="ug-pin" style="--x:9.5;--y:15.5">2</span>
+                        <span class="ug-ring" style="--x:50.5;--y:35;--w:39.5;--h:6.2"></span>
+                        <span class="ug-pin" style="--x:50.5;--y:35">3</span>
+                        <span class="ug-ring" style="--x:9.5;--y:35;--w:39.5;--h:6.2"></span>
+                        <span class="ug-pin" style="--x:9.5;--y:35">4</span>
+                        <span class="ug-ring" style="--x:50.5;--y:43.5;--w:39.5;--h:6.2"></span>
+                        <span class="ug-pin" style="--x:50.5;--y:43.5">5</span>
+                        <span class="ug-ring" style="--x:50.5;--y:52;--w:39.5;--h:6"></span>
+                        <span class="ug-pin" style="--x:50.5;--y:52">6</span>
+                        <span class="ug-ring" style="--x:50.5;--y:60.5;--w:39.5;--h:21.5"></span>
+                        <span class="ug-pin" style="--x:50.5;--y:60.5">7</span>
+                        <span class="ug-ring" style="--x:8;--y:7.2;--w:3;--h:3.5"></span>
+                        <span class="ug-pin" style="--x:11;--y:7.2">8</span>
+                    </div>
+                    <figcaption>نموذج «إذن جديد» — الحقول المعلَّمة بنجمة حمراء إلزامية</figcaption>
+                </figure>
+
+                <ol class="ug-steps">
+                    <li data-pin="1"><strong>السلسلة</strong> — رقم الإذن. يُولَّد تلقائياً بصيغة
+                        <code>HR-PER-YYYY-#####</code>؛ اتركه كما هو.</li>
+                    <li data-pin="2"><strong>تاريخ الترحيل</strong> — تاريخ تسجيل الطلب في النظام.
+                        يأتي بتاريخ اليوم تلقائياً.</li>
+                    <li data-pin="3"><strong>الموظف</strong> — اكتب أول حروف الاسم أو الرقم الوظيفي
+                        واختر من القائمة. اسم الموظف يظهر بجانبه تلقائياً.</li>
+                    <li data-pin="4"><strong>تاريخ الاذن</strong> — اليوم الذي تريد الإذن فيه، وهو
+                        غير تاريخ الترحيل.</li>
+                    <li data-pin="5"><strong>نوع الاذن</strong> — اختر <em>إذن دخول متأخر</em> أو
+                        <em>إذن خروج</em>.</li>
+                    <li data-pin="6"><strong>معتمد الاذن</strong> — المستخدم الذي سيوافق على الطلب.
+                        اختره من قائمة المستخدمين.</li>
+                    <li data-pin="7"><strong>سبب</strong> — اشرح سبب الإذن باختصار. اختياري لكن يُنصح
+                        بتعبئته لتسريع الموافقة.</li>
+                    <li data-pin="8"><strong>حفظ</strong> — أو اضغط <kbd>Ctrl</kbd> + <kbd>S</kbd>.</li>
+                </ol>
+
+                <div class="ug-callout ug-callout-info">
+                    <strong>حقول تُملأ وحدها — لا تحاول تعديلها:</strong>
+                    <em>مؤسسة</em> تأتي من إعدادات النظام، و<em>الوردية</em> تُحدَّد بعد اختيار الموظف
+                    وتاريخ الإذن ونوعه، و<em>من الساعة</em> و<em>إلى الساعة</em> و<em>إجمالي الوقت</em>
+                    يحسبها النظام من الوردية.
+                </div>
+
+                <p>بعد الحفظ يصبح المستند <strong>مسودة</strong>. الطلب لا يصل إلى المعتمِد إلا بعد
+                   الضغط على <strong>اعتماد</strong> (Submit):</p>
+
+                <figure class="ug-shot">
+                    <div class="ug-shot-frame">
+                        <img src="/assets/afppf_project_management/images/user_guide/03-permit-filled.png"
+                             alt="نموذج الإذن بعد تعبئته">
+                    </div>
+                    <figcaption>النموذج بعد التعبئة وقبل الاعتماد</figcaption>
+                </figure>
+
+                <h3 class="ug-subhead">حالات الإذن</h3>
+                <table class="ug-table">
+                    <thead><tr><th style="width:24%">الحالة</th><th>معناها</th></tr></thead>
+                    <tbody>
+                        <tr><td>فتح <span class="ug-en">Open</span></td><td>أُرسل الطلب وينتظر قرار المعتمِد.</td></tr>
+                        <tr><td>موافق عليه <span class="ug-en">Approved</span></td><td>اعتُمد الإذن ويُحتسب في الحضور.</td></tr>
+                        <tr><td>مرفوض <span class="ug-en">Rejected</span></td><td>رُفض الطلب. يظهر السبب في التعليقات إن كتبه المعتمِد.</td></tr>
+                        <tr><td>ملغى <span class="ug-en">Cancelled</span></td><td>أُلغي بعد اعتماده.</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="ug-callout ug-callout-warn">
+                    <strong>أخطاء شائعة:</strong>
+                    ترك الطلب <em>مسودة</em> دون اعتماد فلا يراه المعتمِد؛ أو الخلط بين
+                    <em>تاريخ الترحيل</em> (يوم التسجيل) و<em>تاريخ الاذن</em> (اليوم المطلوب).
+                </div>
+            </section>
+
+            <!-- ============ البدء السريع ============ -->
+            <section class="ug-section" id="ug-start" data-title="البدء السريع">
+                <h2><span class="ug-sec-num">2</span> البدء السريع</h2>
+                <div class="ug-cards">
+                    <article class="ug-card">
+                        <h3>القائمة الجانبية</h3>
+                        <p>تعرض مساحات العمل المتاحة لك. اختر <strong>Project Managment</strong> للوصول
+                        إلى بطاقات المراحل الأربع والبيانات الأساسية والتقارير.</p>
+                    </article>
+                    <article class="ug-card">
+                        <h3>شريط البحث العلوي</h3>
+                        <p>اكتب اسم أي مستند أو تقرير للانتقال إليه مباشرة. مثال: اكتب
+                        <code>Budget</code> ثم اختر <em>Budget List</em> لفتح قائمة الميزانيات.</p>
+                    </article>
+                    <article class="ug-card">
+                        <h3>قائمة المستندات</h3>
+                        <p>كل نوع مستند له صفحة قائمة فيها التصفية والفرز والبحث، وزر
+                        <strong>+ إضافة</strong> لإنشاء سجل جديد.</p>
+                    </article>
+                    <article class="ug-card">
+                        <h3>صفحة المستند</h3>
+                        <p>تعبئة الحقول ثم <strong>حفظ</strong> (Ctrl+S). المستندات المعتمَدة تحتاج
+                        <strong>اعتماد</strong> (Submit) بعد الحفظ حتى تصبح نافذة.</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- ============ دورة حياة المشروع ============ -->
+            <section class="ug-section" id="ug-lifecycle" data-title="دورة حياة المشروع">
+                <h2><span class="ug-sec-num">3</span> دورة حياة المشروع</h2>
+                <p>المسار الطبيعي للعمل داخل النظام، وكل خطوة تبني على التي قبلها:</p>
+                <ol class="ug-flow">
+                    <li>
+                        <span class="ug-flow-badge">1</span>
+                        <div>
+                            <h4>التصميم</h4>
+                            <p>من الفكرة وتحليل المشكلة إلى مقترح مشروع وإطار منطقي واتفاقية تمويل موقّعة.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="ug-flow-badge">2</span>
+                        <div>
+                            <h4>التخطيط</h4>
+                            <p>إنشاء المشروع وأنشطته وميزانيته، وتحديد الفاعلين والمخاطر والمستفيدين وخطط الاجتماعات والإعلام والتقارير.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="ug-flow-badge">3</span>
+                        <div>
+                            <h4>التنفيذ</h4>
+                            <p>متابعة الأنشطة والمشكلات، جمع بيانات المؤشرات، توثيق الاجتماعات والوسائط، وصرف المستخلصات.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="ug-flow-badge">4</span>
+                        <div>
+                            <h4>الإغلاق</h4>
+                            <p>حصر المستفيدين والنتائج النهائية، وتوثيق الدروس المستفادة وقصص النجاح.</p>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+
+            <!-- ============ التصميم ============ -->
+            <section class="ug-section" id="ug-design" data-title="مرحلة التصميم">
+                <h2><span class="ug-sec-num">4</span> مرحلة التصميم</h2>
+                <p>هنا تتحول الفكرة إلى مشروع ممول. الترتيب المقترح للعمل من الأعلى إلى الأسفل:</p>
+                <table class="ug-table">
+                    <thead>
+                        <tr><th style="width:26%">المستند</th><th>الغرض منه</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>قائمة أفكار المشاريع <span class="ug-en">Project Idea List</span></td>
+                            <td>تجميع الأفكار الأولية قبل دراستها. تُصنَّف عبر <span class="ug-en">Idea Group</span>.</td></tr>
+                        <tr><td>تحليل المشكلات <span class="ug-en">Problem Analysis</span></td>
+                            <td>تحديد المشكلة الجذرية وأسبابها ومسبّبيها والفئات المتأثرة بها.</td></tr>
+                        <tr><td>مقترح مشروع <span class="ug-en">Projects Proposal</span></td>
+                            <td>الصياغة الكاملة للمقترح تمهيداً لعرضه على الممول.</td></tr>
+                        <tr><td>طلب مشروع <span class="ug-en">Project Request</span></td>
+                            <td>طلب رسمي بإنشاء مشروع، يربط المقترح بالجهة الطالبة.</td></tr>
+                        <tr><td>الإطار المنطقي <span class="ug-en">Logframe</span></td>
+                            <td>الأهداف والنتائج والمخرجات والمؤشرات. أهم مستند مرجعي للمتابعة لاحقاً.</td></tr>
+                        <tr><td>البرنامج <span class="ug-en">Program</span></td>
+                            <td>المظلة التي تجمع عدة مشاريع تحت هدف واحد.</td></tr>
+                        <tr><td>الممول <span class="ug-en">Donor</span></td>
+                            <td>بيانات الجهة المانحة وجهات الاتصال بها.</td></tr>
+                        <tr><td>الاتفاقية <span class="ug-en">Agreement</span></td>
+                            <td>الاتفاقية الموقّعة مع الممول، وتضم المشاريع والشركاء المشمولين بها.</td></tr>
+                        <tr><td>التمويل <span class="ug-en">Funding</span></td>
+                            <td>مصادر التمويل وحساباتها وتوزيعها وشروط أداة التمويل.</td></tr>
+                        <tr><td>المحفظة <span class="ug-en">Wallet</span></td>
+                            <td>وعاء مالي تُخصَّص منه المبالغ للمشاريع وتُسجَّل فيه التبرعات.</td></tr>
+                        <tr><td>توثيق المشروع <span class="ug-en">Project Documentation</span></td>
+                            <td>حفظ الوثائق والمرفقات المرتبطة بالمشروع في مكان واحد.</td></tr>
+                    </tbody>
+                </table>
+                <div class="ug-callout ug-callout-tip">
+                    <strong>نصيحة:</strong> أنشئ <em>الإطار المنطقي</em> مبكراً واختر مؤشراته من
+                    <em>بنك المؤشرات</em>، لأن تقرير <em>Project Indicators Tracker</em> ومستند
+                    <em>جمع بيانات المؤشرات</em> يعتمدان عليه مباشرة في مرحلة التنفيذ.
+                </div>
+            </section>
+
+            <!-- ============ التخطيط ============ -->
+            <section class="ug-section" id="ug-planning" data-title="مرحلة التخطيط">
+                <h2><span class="ug-sec-num">5</span> مرحلة التخطيط</h2>
+                <table class="ug-table">
+                    <thead>
+                        <tr><th style="width:26%">المستند</th><th>الغرض منه</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>المشروع <span class="ug-en">Project</span></td>
+                            <td>السجل الرئيسي: التواريخ، الحالة، الجهة المنفذة، المواقع الجغرافية.</td></tr>
+                        <tr><td>نشاط <span class="ug-en">Task</span></td>
+                            <td>الأنشطة والمهام الفرعية مع تواريخ البدء والانتهاء والمسؤول.</td></tr>
+                        <tr><td>ميزانية <span class="ug-en">Budget</span></td>
+                            <td>توزيع التكاليف على بنود الحساب. أساس تقارير انحراف الميزانية.</td></tr>
+                        <tr><td>الإطار المنطقي <span class="ug-en">Logframe</span></td>
+                            <td>يُراجَع ويُعتمد هنا بصيغته النهائية قبل بدء التنفيذ.</td></tr>
+                        <tr><td>بيانات موظفي المشروع <span class="ug-en">Project Employees Contact Data</span></td>
+                            <td>فريق العمل وأدواره وبيانات التواصل معه.</td></tr>
+                        <tr><td>خارطة الفاعلين <span class="ug-en">Key Actors Mapping</span></td>
+                            <td>تحليل أصحاب المصلحة ودرجة تأثيرهم واهتمامهم.</td></tr>
+                        <tr><td>إطار تقييم المخاطر <span class="ug-en">Risk Assessment Framework</span></td>
+                            <td>حصر المخاطر واحتمالها وأثرها وإجراءات التخفيف.</td></tr>
+                        <tr><td>كشف المستفيدين <span class="ug-en">Project Beneficiary List</span></td>
+                            <td>الفئات المستهدفة وأعدادها وتوزيعها.</td></tr>
+                        <tr><td>أداة <span class="ug-en">PESTLE Tool</span></td>
+                            <td>تحليل البيئة الخارجية: سياسي، اقتصادي، اجتماعي، تقني، قانوني، بيئي.</td></tr>
+                        <tr><td>خطة الاجتماعات <span class="ug-en">Project Meetings Plan</span></td>
+                            <td>جدولة الاجتماعات الدورية وجدول أعمالها والمدعوين.</td></tr>
+                        <tr><td>خطة الإعلام <span class="ug-en">Project Media Plan</span></td>
+                            <td>التغطيات الإعلامية المخطط لها ومواعيدها.</td></tr>
+                        <tr><td>خطة التقارير <span class="ug-en">Project Reports Plan</span></td>
+                            <td>التقارير الواجب تسليمها للممول ومواعيدها.</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ============ التنفيذ ============ -->
+            <section class="ug-section" id="ug-implementation" data-title="مرحلة التنفيذ">
+                <h2><span class="ug-sec-num">6</span> مرحلة التنفيذ</h2>
+                <table class="ug-table">
+                    <thead>
+                        <tr><th style="width:26%">المستند</th><th>الغرض منه</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>المشروع <span class="ug-en">Project</span></td>
+                            <td>تحديث نسبة الإنجاز والحالة أثناء سير العمل.</td></tr>
+                        <tr><td>قائمة المهام <span class="ug-en">ToDo</span></td>
+                            <td>المهام اليومية الموكلة للأشخاص ومتابعة إغلاقها.</td></tr>
+                        <tr><td>المشكلات <span class="ug-en">Issue</span></td>
+                            <td>تسجيل المعوقات الميدانية ومتابعة معالجتها.</td></tr>
+                        <tr><td>جمع بيانات المؤشرات <span class="ug-en">Indicator Data Collection</span></td>
+                            <td>إدخال القيم الفعلية للمؤشرات دورياً ومقارنتها بالمستهدف.</td></tr>
+                        <tr><td>اجتماعات المشروع <span class="ug-en">Project Meetings</span></td>
+                            <td>محاضر الاجتماعات المنعقدة فعلياً وقراراتها.</td></tr>
+                        <tr><td>وسائط المشروع <span class="ug-en">Project Media</span></td>
+                            <td>الصور والفيديو والمواد الإعلامية الموثّقة من الميدان.</td></tr>
+                        <tr><td>المستخلصات <span class="ug-en">Project Payment Certificate</span></td>
+                            <td>مستخلصات الصرف المعتمدة. تغذّي تقرير <em>ملخص المستخلصات</em>.</td></tr>
+                    </tbody>
+                </table>
+                <div class="ug-callout ug-callout-warn">
+                    <strong>انتبه:</strong> المستندات المالية (المستخلصات والميزانيات) لا تظهر في التقارير
+                    إلا بعد <strong>الاعتماد</strong> (Submit). المستند الذي بقي <em>مسودة</em> لا يُحتسب.
+                </div>
+            </section>
+
+            <!-- ============ الإغلاق ============ -->
+            <section class="ug-section" id="ug-closing" data-title="مرحلة الإغلاق">
+                <h2><span class="ug-sec-num">7</span> مرحلة الإغلاق</h2>
+                <table class="ug-table">
+                    <thead>
+                        <tr><th style="width:26%">المستند</th><th>الغرض منه</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>المشروع <span class="ug-en">Project</span></td>
+                            <td>تغيير الحالة إلى مكتمل وإقفال التواريخ.</td></tr>
+                        <tr><td>المستفيدون <span class="ug-en">Beneficiary</span></td>
+                            <td>الحصر النهائي للمستفيدين الفعليين.</td></tr>
+                        <tr><td>جمع بيانات المؤشرات <span class="ug-en">Indicator Data Collection</span></td>
+                            <td>القياس الختامي لكل مؤشر مقابل المستهدف.</td></tr>
+                        <tr><td>الدروس المستفادة <span class="ug-en">Project Lessons Learned</span></td>
+                            <td>ما نجح وما تعثّر، ليُستفاد منه في المشاريع القادمة.</td></tr>
+                        <tr><td>أداة قصص النجاح <span class="ug-en">Success Story Tool</span></td>
+                            <td>توثيق أثر المشروع في قصة قابلة للنشر.</td></tr>
+                        <tr><td>المشكلات والوسائط</td>
+                            <td>إغلاق ما تبقّى مفتوحاً واستكمال التوثيق.</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ============ البيانات الأساسية ============ -->
+            <section class="ug-section" id="ug-master" data-title="البيانات الأساسية">
+                <h2><span class="ug-sec-num">8</span> البيانات الأساسية</h2>
+                <p>تُدخل مرة واحدة وتُستخدم في كل المشاريع. تعبئتها بشكل صحيح من البداية يوفّر
+                   وقتاً كبيراً ويمنع تكرار السجلات.</p>
+                <div class="ug-chips">
+                    <span class="ug-chip">بنك المؤشرات <em>Bank of Indicators</em></span>
+                    <span class="ug-chip">توثيق المشروع <em>Project Documentation</em></span>
+                    <span class="ug-chip">القطاع <em>Sector</em></span>
+                    <span class="ug-chip">المدينة <em>City</em></span>
+                    <span class="ug-chip">المديرية <em>Directorate</em></span>
+                    <span class="ug-chip">المناطق <em>Districts</em></span>
+                    <span class="ug-chip">القرية <em>Village</em></span>
+                </div>
+                <div class="ug-callout ug-callout-tip">
+                    <strong>ترتيب الإدخال الجغرافي:</strong> المدينة ← المديرية ← المنطقة ← القرية.
+                    إدخالها بغير هذا الترتيب يجعل قوائم الاختيار المرتبطة فارغة.
+                </div>
+            </section>
+
+            <!-- ============ التقارير ============ -->
+            <section class="ug-section" id="ug-reports" data-title="التقارير">
+                <h2><span class="ug-sec-num">9</span> التقارير</h2>
+                <table class="ug-table">
+                    <thead>
+                        <tr><th style="width:34%">التقرير</th><th>ماذا يعرض</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Budget Variance Report</td>
+                            <td>الفرق بين الميزانية المعتمدة والمصروف الفعلي لكل بند.</td></tr>
+                        <tr><td>Budget Variance by Budget Currency</td>
+                            <td>نفس المقارنة لكن بعملة الميزانية الأصلية بدل عملة الشركة.</td></tr>
+                        <tr><td>Delayed Tasks Summary</td>
+                            <td>الأنشطة المتأخرة عن موعدها المخطط ومقدار التأخير.</td></tr>
+                        <tr><td>Project Indicators Tracker</td>
+                            <td>المؤشرات: المستهدف مقابل المتحقق ونسبة الإنجاز.</td></tr>
+                        <tr><td>ملخص المستخلصات <span class="ug-en">Project Disbursement Summary</span></td>
+                            <td>إجمالي المصروف عبر المستخلصات لكل مشروع.</td></tr>
+                    </tbody>
+                </table>
+                <p class="ug-note">في أي تقرير: استعمل المرشّحات بالأعلى لتحديد المشروع والفترة،
+                   ثم <strong>Menu ← Export</strong> للتصدير إلى Excel أو PDF.</p>
+            </section>
+
+            <!-- ============ خطوات عملية ============ -->
+            <section class="ug-section" id="ug-howto" data-title="خطوات عملية شائعة">
+                <h2><span class="ug-sec-num">10</span> خطوات عملية شائعة</h2>
+
+                <details class="ug-howto" open>
+                    <summary>كيف أُنشئ مشروعاً جديداً؟</summary>
+                    <ol>
+                        <li>افتح <strong>Project</strong> من مساحة العمل ثم اضغط <strong>+ إضافة</strong>.</li>
+                        <li>أدخل اسم المشروع وتاريخ البدء والانتهاء المتوقع.</li>
+                        <li>اربطه بـ <em>البرنامج</em> و<em>الاتفاقية</em> و<em>الممول</em> المعنيين.</li>
+                        <li>حدّد الموقع الجغرافي (المدينة/المديرية/القرية) والقطاع.</li>
+                        <li>احفظ (Ctrl+S)، ثم أضف الأنشطة عبر <strong>Task</strong>.</li>
+                    </ol>
+                </details>
+
+                <details class="ug-howto">
+                    <summary>كيف أضيف ميزانية للمشروع؟</summary>
+                    <ol>
+                        <li>افتح <strong>Budget</strong> واضغط <strong>+ إضافة</strong>.</li>
+                        <li>اختر <em>Against = Project</em> وحدّد المشروع والسنة المالية.</li>
+                        <li>أضف بنود الحسابات والمبالغ في الجدول.</li>
+                        <li>احفظ ثم <strong>اعتمد</strong> (Submit) — بدون الاعتماد لن تظهر في تقارير الانحراف.</li>
+                    </ol>
+                </details>
+
+                <details class="ug-howto">
+                    <summary>كيف أسجّل مستخلص صرف؟</summary>
+                    <ol>
+                        <li>افتح <strong>Project Payment Certificate</strong> واضغط <strong>+ إضافة</strong>.</li>
+                        <li>حدّد المشروع والفترة والبنود المصروفة.</li>
+                        <li>أرفق المستندات المؤيدة في قسم المرفقات.</li>
+                        <li>احفظ ثم <strong>اعتمد</strong>؛ عندها يظهر في <em>ملخص المستخلصات</em>.</li>
+                    </ol>
+                </details>
+
+                <details class="ug-howto">
+                    <summary>كيف أُدخل قيمة مؤشر؟</summary>
+                    <ol>
+                        <li>تأكد أولاً أن المؤشر موجود في <em>الإطار المنطقي</em> للمشروع.</li>
+                        <li>افتح <strong>Indicator Data Collection</strong> واضغط <strong>+ إضافة</strong>.</li>
+                        <li>اختر المشروع، ثم أدخل القيمة المتحققة وتاريخ القياس لكل مؤشر.</li>
+                        <li>احفظ، ثم راجع النتيجة في تقرير <em>Project Indicators Tracker</em>.</li>
+                    </ol>
+                </details>
+
+                <details class="ug-howto">
+                    <summary>كيف أطبع مستنداً أو أُصدّره PDF؟</summary>
+                    <ol>
+                        <li>افتح المستند، ثم <strong>Menu ← Print</strong> (أو Ctrl+P).</li>
+                        <li>اختر قالب الطباعة واللغة واتجاه الصفحة.</li>
+                        <li>اضغط <strong>PDF</strong> للتنزيل، أو <strong>Print</strong> للطباعة المباشرة.</li>
+                    </ol>
+                </details>
+            </section>
+
+            <!-- ============ مفاهيم أساسية ============ -->
+            <section class="ug-section" id="ug-basics" data-title="مفاهيم أساسية في النظام">
+                <h2><span class="ug-sec-num">11</span> مفاهيم أساسية في النظام</h2>
+                <div class="ug-cards">
+                    <article class="ug-card">
+                        <h3>مسودة / معتمَد / ملغى</h3>
+                        <p><strong>مسودة</strong> قابلة للتعديل ولا تُحتسب في التقارير.
+                        <strong>معتمَد</strong> نافذ ولا يُعدَّل. <strong>ملغى</strong> أُبطل بعد اعتماده،
+                        ويُعدَّل عبر إنشاء نسخة معدّلة (Amend).</p>
+                    </article>
+                    <article class="ug-card">
+                        <h3>المرفقات</h3>
+                        <p>الشريط الجانبي لكل مستند يقبل رفع الملفات. ارفع العقود والصور والكشوف
+                        على المستند نفسه بدل حفظها خارج النظام.</p>
+                    </article>
+                    <article class="ug-card">
+                        <h3>التعليقات والمتابعون</h3>
+                        <p>أسفل كل مستند مساحة للتعليق. اكتب <code>@</code> متبوعة باسم المستخدم
+                        لإرسال إشعار له مباشرة.</p>
+                    </article>
+                    <article class="ug-card">
+                        <h3>الصلاحيات</h3>
+                        <p>ما تراه يعتمد على دورك (Role). إن لم يظهر لك مستند أو زر معيّن فغالباً
+                        السبب صلاحية ناقصة — راجع مدير النظام.</p>
+                    </article>
+                    <article class="ug-card">
+                        <h3>التصفية والفرز</h3>
+                        <p>في أي قائمة: أضف مرشّحات من الأعلى، واحفظ الشكل الناتج بـ
+                        <strong>Save Filter</strong> لاستدعائه لاحقاً بضغطة واحدة.</p>
+                    </article>
+                    <article class="ug-card">
+                        <h3>الاستيراد الجماعي</h3>
+                        <p>لإدخال بيانات كثيرة دفعة واحدة استعمل <strong>Data Import</strong>: نزّل
+                        القالب، عبّئه، ثم ارفعه.</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- ============ الاختصارات ============ -->
+            <section class="ug-section" id="ug-shortcuts" data-title="اختصارات لوحة المفاتيح">
+                <h2><span class="ug-sec-num">12</span> اختصارات لوحة المفاتيح</h2>
+                <table class="ug-table ug-table-keys">
+                    <thead><tr><th style="width:22%">الاختصار</th><th>الوظيفة</th></tr></thead>
+                    <tbody>
+                        <tr><td><kbd>Ctrl</kbd> + <kbd>S</kbd></td><td>حفظ المستند الحالي</td></tr>
+                        <tr><td><kbd>Ctrl</kbd> + <kbd>G</kbd></td><td>الانتقال السريع (شريط البحث)</td></tr>
+                        <tr><td><kbd>Ctrl</kbd> + <kbd>P</kbd></td><td>طباعة المستند</td></tr>
+                        <tr><td><kbd>Ctrl</kbd> + <kbd>B</kbd></td><td>اعتماد المستند (Submit)</td></tr>
+                        <tr><td><kbd>Esc</kbd></td><td>إغلاق النافذة المنبثقة</td></tr>
+                        <tr><td><kbd>Ctrl</kbd> + <kbd>↑</kbd> / <kbd>↓</kbd></td><td>التنقل بين سجلات القائمة</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ============ الأسئلة الشائعة ============ -->
+            <section class="ug-section" id="ug-faq" data-title="الأسئلة الشائعة">
+                <h2><span class="ug-sec-num">13</span> الأسئلة الشائعة</h2>
+
+                <details class="ug-howto">
+                    <summary>أدخلت بيانات ولا تظهر في التقرير — لماذا؟</summary>
+                    <p>في الغالب المستند ما زال <strong>مسودة</strong>. التقارير المالية تقرأ المستندات
+                    المعتمدة فقط. افتح المستند واضغط <strong>اعتماد</strong>.</p>
+                </details>
+
+                <details class="ug-howto">
+                    <summary>لا أستطيع تعديل مستند معتمَد</summary>
+                    <p>هذا سلوك مقصود. ألغِ المستند (<strong>Cancel</strong>) ثم أنشئ نسخة معدّلة
+                    (<strong>Amend</strong>) واعتمدها. السجل الأصلي يبقى محفوظاً للمراجعة.</p>
+                </details>
+
+                <details class="ug-howto">
+                    <summary>قائمة الاختيار تظهر فارغة</summary>
+                    <p>البيانات الأساسية المرتبطة بها غير مُدخلة بعد، أو أن حقلاً سابقاً يقيّدها لم
+                    تعبّئه (مثل اختيار المديرية قبل القرية).</p>
+                </details>
+
+                <details class="ug-howto">
+                    <summary>ظهر لي سجل مكرر</summary>
+                    <p>تحقق أن السجل السابق لم يُلغَ ثم يُعاد إنشاؤه. المستندات الملغاة تبقى ظاهرة في
+                    القوائم ما لم تُرشّحها بحالة <em>معتمَد</em> فقط.</p>
+                </details>
+
+                <details class="ug-howto">
+                    <summary>نسيت أين أجد مستنداً معيناً</summary>
+                    <p>اضغط <kbd>Ctrl</kbd> + <kbd>G</kbd> واكتب جزءاً من اسمه بالعربية أو الإنجليزية،
+                    وسيقترح عليك النظام الوجهة مباشرة.</p>
+                </details>
+            </section>
+
+            <p class="ug-footer">آخر تحديث لهذا الدليل: يوليو 2026 — نظام إدارة المشاريع AFPPF</p>
+
+        </main>
+    </div>
+</div>
