@@ -1,0 +1,234 @@
+<div class="loan-dashboard">
+
+    <div class="dashboard-header">
+        <!-- Chart.js يُحمَّل محلياً من assets داخل ملف الجافاسكربت (لا يوجد اتصال بالإنترنت على الخادم) -->
+        <div class="header-content">
+            <div class="header-icon"><img src="/assets/afppf_project_management/images/afppf-logo.png" alt="شعار صندوق تشجيع الإنتاج الزراعي والسمكي"></div>
+            <div>
+                <h1>Advance Dashboard</h1>
+                <p>تحليل شامل للسلف والمدفوعات وحالة الطلبات وتتبع الموظفين</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="filters-panel">
+        <div class="filters-body">
+            
+            <div class="filter-box">
+                <label>الفترة</label>
+                <select id="period-filter">
+                    <option value="year">سنوي</option>
+                    <option value="month">شهري</option>
+                    <option value="quarter">ربع سنوي (3 أشهر)</option>
+                    <option value="half">نصف سنوي</option>
+                    <option value="all">كل الفترات</option>
+                </select>
+            </div>
+
+            <div class="filter-box">
+                <label>من تاريخ</label>
+                <div id="from-date-filter"></div>
+            </div>
+
+            <div class="filter-box">
+                <label>إلى تاريخ</label>
+                <div id="to-date-filter"></div>
+            </div>
+
+            <div class="filter-box">
+                <label>الموظف</label>
+                <div id="employee-filter"></div>
+            </div>
+
+            <div class="filter-box">
+                <label>نوع السلفة</label>
+                <div id="loan-product-filter"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- اسم الموظف المختار (يظهر أسفل الفلاتر فوق البطاقات عند اختيار موظف) -->
+    <div id="selected-employee-bar" class="afp-emp-bar" hidden>
+        <span class="afp-emp-bar__icon">👤</span>
+        <span class="afp-emp-bar__label">الموظف المحدد:</span>
+        <strong class="afp-emp-bar__name" id="selected-employee-name">—</strong>
+        <span class="afp-emp-bar__org" id="selected-employee-org" hidden>
+            <span class="afp-emp-bar__org-sep">•</span>
+            <span class="afp-emp-bar__org-label">المؤسسة:</span>
+            <span class="afp-emp-bar__org-name" id="selected-employee-org-name"></span>
+        </span>
+        <span class="afp-emp-bar__code" id="selected-employee-code"></span>
+    </div>
+
+    <div class="main-cards">
+        <div class="main-card card-blue">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg></div>
+            <div class="card-title">إجمالي مبالغ السلف</div>
+            <div class="card-value" id="total-loan-amount">0</div>
+            <div class="card-desc">مجموع كل السلف خلال الفترة المحددة</div>
+        </div>
+
+        <div class="main-card card-green">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></div>
+            <div class="card-title">إجمالي المدفوع</div>
+            <div class="card-value" id="total-paid-amount">0</div>
+            <div class="card-desc">المبالغ التي تم تسديدها بالفعل</div>
+        </div>
+
+        <div class="main-card card-orange">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg></div>
+            <div class="card-title">متوسط مبلغ السلفة</div>
+            <div class="card-value" id="average-loan-amount">0</div>
+            <div class="card-desc">متوسط قيمة السلفة لكل طلب</div>
+        </div>
+
+        <div class="main-card card-purple">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg></div>
+            <div class="card-title">المبلغ المتبقي</div>
+            <div class="card-value" id="remaining-loan-amount">0</div>
+            <div class="card-desc">إجمالي المبالغ المتبقية غير المسددة</div>
+        </div>
+    </div>
+
+    <div class="small-stat-grid">
+        <div class="small-stat-card stat-blue">
+            <div class="pulse-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg></div>
+            <div class="stat-content">
+                <span class="small-stat-title">عدد الطلبات</span>
+                <strong id="total-requests" class="small-stat-value">0</strong>
+            </div>
+        </div>
+
+        <div class="small-stat-card stat-green">
+            <div class="pulse-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <div class="stat-content">
+                <span class="small-stat-title">الحالة المعتمدة</span>
+                <strong id="approved-requests" class="small-stat-value">0</strong>
+            </div>
+        </div>
+
+        <div class="small-stat-card stat-orange">
+            <div class="pulse-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="stat-content">
+                <span class="small-stat-title">قيد الإجراء</span>
+                <strong id="pending-requests" class="small-stat-value">0</strong>
+            </div>
+        </div>
+
+        <div class="small-stat-card stat-red">
+            <div class="pulse-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" x2="9" y1="9" y2="15"/><line x1="9" x2="15" y1="9" y2="15"/></svg></div>
+            <div class="stat-content">
+                <span class="small-stat-title">مرفوضة</span>
+                <strong id="rejected-requests" class="small-stat-value">0</strong>
+            </div>
+        </div>
+
+        <div class="small-stat-card stat-purple">
+            <div class="pulse-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div>
+            <div class="stat-content">
+                <span class="small-stat-title">نسبة السداد</span>
+                <strong id="repayment-rate" class="small-stat-value">0%</strong>
+            </div>
+        </div>
+
+        <!-- مفتاح قسم المتأخرات: القسم كله (البطاقتان والرسم والزر والجدول)
+             مخفي حتى يُضغط على هذه البطاقة، فلا يزحم الواجهة بلا داعٍ. -->
+        <div class="small-stat-card stat-overdue overdue-toggle-card" id="overdue-toggle-card"
+             role="button" tabindex="0" aria-expanded="false" aria-controls="overdue-section">
+            <div class="pulse-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg></div>
+            <div class="stat-content">
+                <span class="small-stat-title">متأخرة</span>
+                <strong id="overdue-badge-count" class="small-stat-value">0</strong>
+            </div>
+            <span class="overdue-toggle-hint">اضغط للعرض</span>
+        </div>
+
+    </div>
+
+    <!-- ===== قسم السلف المتأخرة: مخفي افتراضياً، يفتحه مفتاح "متأخرة" أعلاه.
+         الإخفاء بنمط سطري (لا بصنف) حتى ينتقل مع النسخة المستنسخة للطباعة. ===== -->
+    <div class="overdue-section" id="overdue-section" style="display:none;">
+        <div class="overdue-cards">
+            <div class="overdue-card overdue-card-count">
+                <div class="overdue-card-top">
+                    <span class="overdue-card-icon">⚠️</span>
+                    <span class="overdue-card-label">عدد السلف المتأخرة</span>
+                </div>
+                <div class="overdue-card-value" id="overdue-count">0</div>
+                <div class="overdue-card-desc">أقساط استحقت قبل تاريخ بداية الفترة المحددة ولم تُسدَّد</div>
+            </div>
+
+            <div class="overdue-card overdue-card-amount">
+                <div class="overdue-card-top">
+                    <span class="overdue-card-icon">💸</span>
+                    <span class="overdue-card-label">إجمالي المبالغ المتأخرة</span>
+                </div>
+                <div class="overdue-card-value" id="overdue-amount">0</div>
+                <div class="overdue-card-desc">الفرق بين ما استُحق قبل بداية الفترة وما تم سداده فعلياً</div>
+            </div>
+
+            <div class="overdue-action-bar">
+                <button type="button" id="overdue-details-btn" class="overdue-details-btn">
+                    📋 عرض تفاصيل السلف المتأخرة
+                </button>
+            </div>
+        </div>
+
+        <div class="overdue-chart-box">
+            <h3>أعمار الديون المتأخرة</h3>
+            <p class="overdue-chart-sub">توزيع المبالغ المتأخرة حسب مدة التأخير</p>
+            <div id="overdue-aging-chart"></div>
+        </div>
+    </div>
+
+    <div id="overdue-details-section" class="overdue-details-section" style="display:none;">
+        <div class="section-title">
+            <h2>تفاصيل السلف المتأخرة</h2>
+            <p>أقساط استحقت قبل <span id="overdue-cutoff-label">بداية الفترة</span> ولم يتم سدادها</p>
+        </div>
+        <div id="overdue-details-container"></div>
+    </div>
+
+    <div class="analytics-card">
+        <div class="analytics-header">
+            <h2>حركة السلف والمدفوعات</h2>
+            <p>عمودان لكل شهر — مبالغ السلف والمبالغ المدفوعة — ومنحنى مظلَّل يوضح عدد الطلبات</p>
+        </div>
+        <div class="main-chart-area" style="position: relative;">
+            <div id="monthly-loan-chart"></div>
+        </div>
+    </div>
+
+    <div class="donut-section" style="display: flex; gap: 20px; justify-content: space-between;">
+        <div class="donut-box" style="flex: 1;">
+            <h3>توزيع الطلبات حسب الحالة</h3>
+            <div class="donut-content" style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="width: 50%; max-width: 220px;">
+                <div id="status-chart"></div>
+                </div>
+                <div id="status-details" class="donut-info" style="width: 45%;"></div>
+            </div>
+        </div>
+
+        <div class="donut-box" style="flex: 1;">
+            <h3>توزيع السلف حسب النوع</h3>
+            <div class="donut-content" style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="width: 50%; max-width: 220px;">
+                    <div id="loan-type-chart"></div>
+                </div>
+                <div id="loan-type-details" class="donut-info" style="width: 45%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="employees-section">
+        <div class="section-title">
+            <h2>بيانات الموظفين والسلف بالتفصيل</h2>
+            <p>تحديث فوري تفاعلي بناءً على الفلاتر المحددة</p>
+        </div>
+        <div id="employees-container" class="employees-container">
+            </div>
+    </div>
+
+</div>
